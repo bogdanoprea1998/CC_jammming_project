@@ -1,10 +1,10 @@
 const clientID = '0c6f6f9bf82e4034baed57b7a12cb000';
-const redirectURI = 'http://bobojammming.surge.sh/';
+const redirectURI = 'http://localhost:3000/';
 
 let accessToken;
 
 const Spotify = {
-    getAccesToken(){
+    getAccessToken(){
         if(accessToken){
             return accessToken;
         }
@@ -26,7 +26,7 @@ const Spotify = {
     },
 
     search(term){
-        const accessToken = Spotify.getAccesToken();
+        const accessToken = Spotify.getAccessToken();
 
         return fetch(
             `https://api.spotify.com/v1/search?type=track&q=${term}`, 
