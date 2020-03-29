@@ -47,12 +47,27 @@ class App extends React.Component {
     this.setState({playlistName: name});
   }
 
+  savePlaylist() {
+    let tracks = this.state.playlistTracks;
+    if(tracks.length && this.state.playlistName) {
+      let trackURIs = tracks.map(trackIndex => trackIndex.uri);
+      Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
+        this.setState({
+          playlistName: 'New Playlist',
+          playlistTracks: []
+        });
+        document.getElementById('Playlist-name').value = this.state.playlistName;
+      });
+    }
+  }
+
+  /*
   savePlaylist(){
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
-    Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
-      this.setState({playlistName: 'New Playlist', playlistTracks: []});
-    })
+    Spotify.savePlaylist(this.state.playlistName, trackURIs);
+    this.setState({playlistName: 'New Playlist', playlistTracks: []});
   }
+  */
 
   search(term) {
 		console.log(`The search term was ${term}`);
